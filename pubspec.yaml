@@ -28,6 +28,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   eva_icons_flutter: ^3.1.0
+  flutter_staggered_animations: ^1.0.0
+  badges: ^2.0.3
+  flutter_easyloading: ^3.0.5
   provider: ^6.0.3
   flutter:
     sdk: flutter
@@ -63,6 +66,7 @@ flutter:
   assets:
     - assets/images/murakami_welcome.jpg
     - assets/images/alaska_seaFood.jpg
+    - assets/images/food_two.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
