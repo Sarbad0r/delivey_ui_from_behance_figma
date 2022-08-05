@@ -30,6 +30,11 @@ dependencies:
   eva_icons_flutter: ^3.1.0
   flutter_staggered_animations: ^1.0.0
   badges: ^2.0.3
+  get: ^4.6.5
+  flutter_color: ^2.0.0
+  yandex_mapkit: ^2.0.4
+  http: ^0.13.5
+  dio: ^4.0.6
   flutter_easyloading: ^3.0.5
   provider: ^6.0.3
   flutter:
@@ -67,6 +72,10 @@ flutter:
     - assets/images/murakami_welcome.jpg
     - assets/images/alaska_seaFood.jpg
     - assets/images/food_two.jpg
+    - assets/map/place.png
+    - assets/images/burger_king.jpg
+    - assets/images/salat.jpg
+    - assets/images/coffeelat.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

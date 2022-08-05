@@ -32,6 +32,7 @@ class CartProvider extends ChangeNotifier {
             "Roll with fresh salmon, soft avocado and cream cheese under a wide layer of massago caviar for true gourmets",
         favorite: false),
   ];
+
   List<Product> cartProductList = [];
   List<Product> favoritesProductList = [];
 
@@ -70,7 +71,7 @@ class CartProvider extends ChangeNotifier {
   bool checkProductFavorite(Product product) {
     return favoritesProductList.contains(product);
   }
-
+  
   void addToFavorite(Product product) {
     if (favoritesProductList.contains(product)) {
       favoritesProductList.removeWhere((element) => element.id == product.id);
@@ -79,6 +80,8 @@ class CartProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+
 
   double totalOfCart() {
     double res = 0.0;

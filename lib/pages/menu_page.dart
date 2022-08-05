@@ -2,8 +2,10 @@ import 'package:badges/badges.dart';
 import 'package:delivery_food_app_from_behance1/pages/cart_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/product_about_page.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/cart_provider.dart';
+import 'package:delivery_food_app_from_behance1/utils/dimension.dart';
 import 'package:delivery_food_app_from_behance1/widgets/main_page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product.dart';
@@ -27,36 +29,45 @@ class _MenuPageState extends State<MenuPage> {
       body: Column(
         children: [
           SizedBox(
-            height: 50,
+            height: Dimensions.size50,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+            padding: EdgeInsets.only(
+                left: Dimensions.size10, right: Dimensions.size10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back)),
                 Expanded(
                     child: Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  padding: EdgeInsets.only(
+                      left: Dimensions.size5, right: Dimensions.size5),
                   child: Container(
-                    height: 35,
+                    height: Dimensions.size30 + 5,
                     child: Stack(
                       children: [
                         TextField(
                           controller: _searchController,
                           decoration: InputDecoration(
-                              contentPadding:
-                                  const EdgeInsets.only(top: 4, left: 15),
+                              contentPadding: EdgeInsets.only(
+                                top: 4,
+                                left: Dimensions.size15,
+                              ),
                               prefixIcon: Icon(Icons.search),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),
-                                  borderRadius: BorderRadius.circular(20)),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size20)),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),
-                                  borderRadius: BorderRadius.circular(20))),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.size20))),
                           onChanged: (v) {
                             listForSearch.clear();
                             if (_searchController.text.isEmpty) {
@@ -102,7 +113,7 @@ class _MenuPageState extends State<MenuPage> {
                                   icon: Icon(
                                     Icons.close,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: Dimensions.size20,
                                   )))
                       ],
                     ),
@@ -114,10 +125,10 @@ class _MenuPageState extends State<MenuPage> {
                   animationType: BadgeAnimationType.slide,
                   showBadge:
                       cartProvider.cartProductList.isEmpty ? false : true,
-                  badgeColor: Colors.green,
+                  badgeColor: HexColor("2db45b"),
                   badgeContent: Text(
                     "${cartProvider.cartProductList.length}",
-                    style: TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: Dimensions.size10),
                   ),
                   child: IconButton(
                       onPressed: () {
@@ -134,7 +145,10 @@ class _MenuPageState extends State<MenuPage> {
           if (listForSearch.isNotEmpty)
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.only(right: 30, left: 30),
+                  padding: EdgeInsets.only(
+                    right: Dimensions.size30,
+                    left: Dimensions.size30,
+                  ),
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: listForSearch.length,
@@ -153,26 +167,26 @@ class _MenuPageState extends State<MenuPage> {
                               Stack(
                                 children: [
                                   Container(
-                                    height: 180,
+                                    height: Dimensions.size10 * 18,
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.size10)),
                                   ),
                                   Positioned(
                                     bottom: 0,
                                     right: 0,
                                     left: 0,
                                     child: Container(
-                                      height: 150,
+                                      height: Dimensions.size15 * 10,
                                       decoration: BoxDecoration(
                                           color: Colors.grey[800],
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.size10)),
                                     ),
                                   ),
                                   Positioned(
                                     bottom: 0,
-                                    left: 20,
+                                    left: Dimensions.size20,
                                     right: 0,
                                     top: 0,
                                     child: Container(
@@ -183,27 +197,28 @@ class _MenuPageState extends State<MenuPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Hero(
-                                            tag:
-                                                "${cutSpace(listForSearch[index].name!)}",
+                                            tag: cutSpace(
+                                                listForSearch[index].name!),
                                             child: Container(
-                                              width: 130,
-                                              height: 130,
+                                              width: Dimensions.size10 * 11,
+                                              height: Dimensions.size10 * 11,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(70),
+                                                      BorderRadius.circular(
+                                                          Dimensions.size70),
                                                   image: DecorationImage(
                                                       fit: BoxFit.cover,
                                                       image: AssetImage(
                                                           '${listForSearch[index].image}'))),
                                             ),
                                           ),
-                                          const SizedBox(
-                                            width: 15,
+                                          SizedBox(
+                                            width: Dimensions.size15,
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                top: 50,
+                                              padding: EdgeInsets.only(
+                                                top: Dimensions.size50,
                                               ),
                                               child: Column(
                                                 crossAxisAlignment:
@@ -212,21 +227,25 @@ class _MenuPageState extends State<MenuPage> {
                                                   // ignore: prefer_const_constructors
                                                   Text(
                                                     "${listForSearch[index].name}",
-                                                    style:
-                                                        TextStyle(fontSize: 16),
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            Dimensions.size16),
                                                   ),
-                                                  const Expanded(
+                                                  Expanded(
                                                     child: Text(
                                                       'No.1 in Sales',
                                                       style: TextStyle(
-                                                          fontSize: 13),
+                                                          fontSize: Dimensions
+                                                                  .size14 -
+                                                              1),
                                                     ),
                                                   ),
                                                   Expanded(
                                                     child: Text(
                                                       "\$${listForSearch[index].price!.toStringAsFixed(2)}",
                                                       style: TextStyle(
-                                                          fontSize: 16),
+                                                          fontSize: Dimensions
+                                                              .size16),
                                                     ),
                                                   )
                                                 ],
@@ -243,9 +262,8 @@ class _MenuPageState extends State<MenuPage> {
                                                     .checkProductFavorite(
                                                         listForSearch[index]))
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 30),
+                                                    padding: EdgeInsets.only(
+                                                        top: Dimensions.size30),
                                                     child: IconButton(
                                                         onPressed: () {
                                                           cartProvider
@@ -258,9 +276,8 @@ class _MenuPageState extends State<MenuPage> {
                                                   )
                                                 else
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 30),
+                                                    padding: EdgeInsets.only(
+                                                        top: Dimensions.size30),
                                                     child: IconButton(
                                                         onPressed: () {
                                                           cartProvider
@@ -287,19 +304,21 @@ class _MenuPageState extends State<MenuPage> {
                                                 else
                                                   Row(
                                                     children: [
-                                                      IconButton(
-                                                          onPressed: () {
-                                                            cartProvider
-                                                                .removeFromCart(
-                                                                    listForSearch[
-                                                                        index]);
-                                                          },
-                                                          icon: Icon(
-                                                            Icons
-                                                                .remove_circle_outline,
-                                                            color: Colors
-                                                                .grey[500],
-                                                          )),
+                                                      Expanded(
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              cartProvider
+                                                                  .removeFromCart(
+                                                                      listForSearch[
+                                                                          index]);
+                                                            },
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .remove_circle_outline,
+                                                              color: Colors
+                                                                  .grey[500],
+                                                            )),
+                                                      ),
                                                       Text(
                                                           "${listForSearch[index].quantity}"),
                                                       Expanded(
@@ -323,8 +342,8 @@ class _MenuPageState extends State<MenuPage> {
                                   )
                                 ],
                               ),
-                              const SizedBox(
-                                height: 20,
+                              SizedBox(
+                                height: Dimensions.size20,
                               )
                             ],
                           ),

@@ -2,8 +2,11 @@ import 'package:badges/badges.dart';
 import 'package:delivery_food_app_from_behance1/models/product.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_color/flutter_color.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/dimension.dart';
 import 'cart_page.dart';
 
 class ProductAboutPage extends StatefulWidget {
@@ -37,11 +40,12 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          const SizedBox(
-            height: 50,
+          SizedBox(
+            height: Dimensions.size50,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+            padding: EdgeInsets.only(
+                left: Dimensions.size10, right: Dimensions.size10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -52,25 +56,28 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                     icon: const Icon(Icons.arrow_back)),
                 Expanded(
                     child: Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  padding: EdgeInsets.only(
+                      left: Dimensions.size5, right: Dimensions.size5),
                   child: Container(
-                    height: 35,
+                    height: Dimensions.size70 / 2,
                     child: Stack(
                       children: [
                         TextField(
                           controller: _searchController,
                           decoration: InputDecoration(
-                              contentPadding:
-                                  const EdgeInsets.only(top: 4, left: 15),
-                              prefixIcon: Icon(Icons.search),
+                              contentPadding: EdgeInsets.only(
+                                  top: 4, left: Dimensions.size15),
+                              prefixIcon: const Icon(Icons.search),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),
-                                  borderRadius: BorderRadius.circular(20)),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size20)),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),
-                                  borderRadius: BorderRadius.circular(20))),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.size20))),
                           onChanged: (v) {
                             setState(() {});
                           },
@@ -88,7 +95,7 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                                   icon: Icon(
                                     Icons.close,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: Dimensions.size20,
                                   )))
                       ],
                     ),
@@ -100,29 +107,29 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                   animationType: BadgeAnimationType.slide,
                   showBadge:
                       cartProvider.cartProductList.isEmpty ? false : true,
-                  badgeColor: Colors.green,
+                  badgeColor: HexColor("2db45b"),
                   badgeContent: Text(
                     "${cartProvider.cartProductList.length}",
-                    style: TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: Dimensions.size10),
                   ),
                   child: IconButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CartPage()));
+                                builder: (context) => const CartPage()));
                       },
                       icon: const Icon(Icons.shopping_cart)),
                 )
               ],
             ),
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: Dimensions.size15,
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 30,
+            padding: EdgeInsets.only(
+              left: Dimensions.size30,
             ),
             child: Container(
               child: Column(
@@ -131,37 +138,38 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                   Row(
                     children: [
                       Container(
-                        width: 50,
-                        height: 50,
+                        width: Dimensions.size50,
+                        height: Dimensions.size50,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(30)),
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.size30)),
                       ),
-                      const SizedBox(
-                        width: 10,
+                      SizedBox(
+                        width: Dimensions.size10,
                       ),
-                      const Text(
+                      Text(
                         "Hi, Kate",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: Dimensions.size18,
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
+                      SizedBox(
+                        width: Dimensions.size10,
                       ),
-                      const Icon(
+                      Icon(
                         Icons.location_on_outlined,
-                        size: 25,
+                        size: Dimensions.size25,
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: Dimensions.size10,
                   ),
                   Text('8 people online',
-                      style: TextStyle(color: Colors.green[300])),
-                  const SizedBox(
-                    height: 25,
+                      style: TextStyle(color: HexColor("2db45b"))),
+                  SizedBox(
+                    height: Dimensions.size25,
                   ),
                 ],
               ),
@@ -169,7 +177,8 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: EdgeInsets.only(
+                  left: Dimensions.size20, right: Dimensions.size20),
               child: Stack(
                 children: [
                   Container(),
@@ -178,15 +187,17 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                     right: 0,
                     left: 0,
                     child: Container(
-                      height: (MediaQuery.of(context).size.height / 2) + 150,
+                      height: (MediaQuery.of(context).size.height / 2) +
+                          Dimensions.size15 * 10,
                       decoration: BoxDecoration(
                           color: Colors.grey[700],
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(Dimensions.size10))),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    padding: EdgeInsets.only(
+                        left: Dimensions.size30, right: Dimensions.size30),
                     child: Container(
                       width: double.maxFinite,
                       child: Column(
@@ -194,25 +205,26 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                           Hero(
                             tag: "${cutSpace(widget.product!.name!)}",
                             child: Container(
-                              width: 130,
-                              height: 130,
+                              width: Dimensions.size10 * 13,
+                              height: Dimensions.size10 * 13,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size100),
                                   image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: AssetImage(
                                           '${widget.product!.image}'))),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: Dimensions.size10,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "${widget.product!.name}",
-                                style: const TextStyle(fontSize: 30),
+                                style: TextStyle(fontSize: Dimensions.size30),
                               ),
                               if (!cartProvider
                                   .checkProductFavorite(widget.product!))
@@ -234,28 +246,32 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                                     ))
                             ],
                           ),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: Dimensions.size20,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            padding: EdgeInsets.only(
+                                left: Dimensions.size15,
+                                right: Dimensions.size15),
                             child: Container(
-                              height: 50,
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
+                              height: Dimensions.size50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(Dimensions.size50)),
                                   color: Colors.black),
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
+                                padding: EdgeInsets.only(
+                                    left: Dimensions.size15,
+                                    right: Dimensions.size15),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "\$${widget.product!.price}",
-                                      style: const TextStyle(
-                                          color: Colors.yellow, fontSize: 20),
+                                      style: TextStyle(
+                                          color: HexColor('e3b100'),
+                                          fontSize: Dimensions.size20),
                                     ),
                                     Row(
                                       children: [
@@ -284,57 +300,63 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: Dimensions.size10,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                children: const [
-                                  Icon(Icons.timer),
+                                children: [
+                                  const Icon(Icons.timer),
                                   SizedBox(
-                                    width: 10,
+                                    width: Dimensions.size10,
                                   ),
-                                  Text("8 min")
+                                  const Text("8 min")
                                 ],
                               ),
                               Row(
-                                children: const [
-                                  Icon(Icons.light),
+                                children: [
+                                  const Icon(Icons.light),
                                   SizedBox(
-                                    width: 10,
+                                    width: Dimensions.size10,
                                   ),
-                                  Text("345 kal")
+                                  const Text("345 kal")
                                 ],
                               ),
                               Row(
-                                children: const [
-                                  Icon(Icons.check),
+                                children: [
+                                  const Icon(Icons.check),
                                   SizedBox(
-                                    width: 10,
+                                    width: Dimensions.size10,
                                   ),
-                                  Text("Top")
+                                  const Text("Top")
                                 ],
                               )
                             ],
                           ),
                           SizedBox(
-                            height: 20,
+                            height: Dimensions.size20,
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "About",
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: Dimensions.size18),
                             ),
                           ),
-                          Wrap(
+                          ListView(
+                            shrinkWrap: true,
                             children: [
-                              Text(
-                                "${widget.product!.about}",
-                                style: TextStyle(fontSize: 18),
-                              )
+                              Wrap(
+                                children: [
+                                  Text(
+                                    "${widget.product!.about}",
+                                    style:
+                                        TextStyle(fontSize: Dimensions.size18),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
                           Expanded(child: Container()),
@@ -343,30 +365,43 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  width: 150,
-                                  height: 50,
+                                  width: Dimensions.size15 * 10,
+                                  height: Dimensions.size50,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.green[300]),
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.size50),
+                                      color: HexColor("2db45b")),
                                   child: Center(
                                     child: Text(
                                       "Pay",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                          fontSize: Dimensions.size18),
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  width: 80,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.white),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.shopping_cart,
-                                      color: Colors.green[300],
+                                InkWell(
+                                  onTap: () {
+                                    if (cartProvider
+                                        .checkProductCart(widget.product!)) {
+                                      Get.snackbar("Уведомление",
+                                          "Продукт уже был добавлен в корзину");
+                                    } else {
+                                      cartProvider.addToCart(widget.product!);
+                                    }
+                                  },
+                                  child: Container(
+                                    width: Dimensions.size80,
+                                    height: Dimensions.size50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.size50),
+                                        color: Colors.white),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.shopping_cart,
+                                        color: HexColor("2db45b"),
+                                      ),
                                     ),
                                   ),
                                 )
