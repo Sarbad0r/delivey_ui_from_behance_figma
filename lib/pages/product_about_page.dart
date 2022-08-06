@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:badges/badges.dart';
 import 'package:delivery_food_app_from_behance1/models/product.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/cart_provider.dart';
@@ -67,7 +69,10 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(
                                   top: 4, left: Dimensions.size15),
-                              prefixIcon: const Icon(Icons.search),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: Dimensions.size25,
+                              ),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),
@@ -119,7 +124,10 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                             MaterialPageRoute(
                                 builder: (context) => const CartPage()));
                       },
-                      icon: const Icon(Icons.shopping_cart)),
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        size: Dimensions.size25,
+                      )),
                 )
               ],
             ),
@@ -233,16 +241,20 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                                       cartProvider
                                           .addToFavorite(widget.product!);
                                     },
-                                    icon: const Icon(Icons.favorite_border))
+                                    icon: Icon(
+                                      Icons.favorite_border,
+                                      size: Dimensions.size25,
+                                    ))
                               else
                                 IconButton(
                                     onPressed: () {
                                       cartProvider
                                           .addToFavorite(widget.product!);
                                     },
-                                    icon: const Icon(
+                                    icon: Icon(
                                       Icons.favorite,
                                       color: Colors.red,
+                                      size: Dimensions.size25,
                                     ))
                             ],
                           ),
@@ -280,18 +292,24 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                                               cartProvider.removeFromCart(
                                                   widget.product!);
                                             },
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.remove_circle_outline,
                                               color: Colors.grey,
+                                              size: Dimensions.size25,
                                             )),
-                                        Text("${widget.product!.quantity}"),
+                                        Text(
+                                          "${widget.product!.quantity}",
+                                          style: TextStyle(
+                                              fontSize: Dimensions.size20),
+                                        ),
                                         IconButton(
                                             onPressed: () {
                                               cartProvider
                                                   .addToCart(widget.product!);
                                             },
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.add_circle,
+                                              size: Dimensions.size25,
                                             )),
                                       ],
                                     )
@@ -308,29 +326,50 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.timer),
+                                  Icon(
+                                    Icons.timer,
+                                    size: Dimensions.size25,
+                                  ),
                                   SizedBox(
                                     width: Dimensions.size10,
                                   ),
-                                  const Text("8 min")
+                                  Text(
+                                    "8 min",
+                                    style:
+                                        TextStyle(fontSize: Dimensions.size16),
+                                  )
                                 ],
                               ),
                               Row(
                                 children: [
-                                  const Icon(Icons.light),
+                                  Icon(
+                                    Icons.light,
+                                    size: Dimensions.size25,
+                                  ),
                                   SizedBox(
                                     width: Dimensions.size10,
                                   ),
-                                  const Text("345 kal")
+                                  Text(
+                                    "345 kal",
+                                    style:
+                                        TextStyle(fontSize: Dimensions.size16),
+                                  )
                                 ],
                               ),
                               Row(
                                 children: [
-                                  const Icon(Icons.check),
+                                  Icon(
+                                    Icons.check,
+                                    size: Dimensions.size25,
+                                  ),
                                   SizedBox(
                                     width: Dimensions.size10,
                                   ),
-                                  const Text("Top")
+                                  Text(
+                                    "Top",
+                                    style:
+                                        TextStyle(fontSize: Dimensions.size16),
+                                  )
                                 ],
                               )
                             ],
@@ -401,6 +440,7 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
                                       child: Icon(
                                         Icons.shopping_cart,
                                         color: HexColor("2db45b"),
+                                        size: Dimensions.size25,
                                       ),
                                     ),
                                   ),

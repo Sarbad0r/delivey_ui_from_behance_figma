@@ -59,8 +59,8 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: Dimensions.size10,
                   ),
                   Text('8 people online',
                       style: TextStyle(color: HexColor("2db45b"))),
@@ -115,29 +115,36 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                               height: Dimensions.size20 + 2,
                               decoration: BoxDecoration(
                                   color: Colors.white.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Center(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size10)),
+                              child: Center(
                                 child: Text(
                                   "20-30 min",
-                                  style: TextStyle(fontSize: 13),
+                                  style: TextStyle(
+                                      fontSize: Dimensions.size14 - 1),
                                 ),
                               ),
                             ),
-                            const Text("2.4 km"),
+                            Text("2.4 km",
+                                style: TextStyle(fontSize: Dimensions.size16)),
                             Row(
                               children: [
                                 Icon(
                                   Icons.star,
                                   color: Colors.yellow[700],
-                                  size: 15,
+                                  size: Dimensions.size15,
                                 ),
-                                const SizedBox(
-                                  width: 7,
+                                SizedBox(
+                                  width: Dimensions.size7,
                                 ),
-                                const Text("4.7"),
+                                Text(
+                                  "4.7",
+                                  style: TextStyle(fontSize: Dimensions.size16),
+                                ),
                               ],
                             ),
-                            const Text("Sushi 1")
+                            Text("Sushi 1",
+                                style: TextStyle(fontSize: Dimensions.size16))
                           ],
                         ),
                       )
@@ -187,7 +194,8 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                               Container(
                                 height: Dimensions.size18 * 10,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10)),
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.size10)),
                               ),
                               Positioned(
                                 bottom: 0,
@@ -197,7 +205,8 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                   height: Dimensions.size50 * 3,
                                   decoration: BoxDecoration(
                                       color: Colors.grey[800],
-                                      borderRadius: BorderRadius.circular(10)),
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.size10)),
                                 ),
                               ),
                               Positioned(
@@ -251,9 +260,9 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                                 child: Text(
                                                   'No.1 in Sales',
                                                   style: TextStyle(
-                                                      fontSize:
-                                                          Dimensions.size14 -
-                                                              1),
+                                                    fontSize:
+                                                        Dimensions.size14 - 1,
+                                                  ),
                                                 ),
                                               ),
                                               Expanded(
@@ -287,8 +296,10 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                                                   .listOfProduct[
                                                               index]);
                                                     },
-                                                    icon: const Icon(
-                                                        Icons.favorite_border)),
+                                                    icon: Icon(
+                                                      Icons.favorite_border,
+                                                      size: Dimensions.size25,
+                                                    )),
                                               )
                                             else
                                               Padding(
@@ -301,9 +312,10 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                                                   .listOfProduct[
                                                               index]);
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.favorite,
                                                       color: Colors.red,
+                                                      size: Dimensions.size25,
                                                     )),
                                               ),
                                             if (!cartProvider.checkProductCart(
@@ -316,12 +328,14 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                                                 .listOfProduct[
                                                             index]);
                                                   },
-                                                  icon: const Icon(Icons
-                                                      .add_circle_outlined))
+                                                  icon: Icon(
+                                                    Icons.add_circle_outlined,
+                                                    size: Dimensions.size25,
+                                                  ))
                                             else
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                    MainAxisAlignment.start,
                                                 children: [
                                                   Expanded(
                                                     child: IconButton(
@@ -337,10 +351,16 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                                               .remove_circle_outline,
                                                           color:
                                                               Colors.grey[500],
+                                                          size:
+                                                              Dimensions.size25,
                                                         )),
                                                   ),
                                                   Text(
-                                                      "${cartProvider.listOfProduct[index].quantity}"),
+                                                    "${cartProvider.listOfProduct[index].quantity}",
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            Dimensions.size18),
+                                                  ),
                                                   Expanded(
                                                     child: IconButton(
                                                         onPressed: () {
@@ -349,8 +369,12 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                                                       .listOfProduct[
                                                                   index]);
                                                         },
-                                                        icon: const Icon(Icons
-                                                            .add_circle_outlined)),
+                                                        icon: Icon(
+                                                          Icons
+                                                              .add_circle_outlined,
+                                                          size:
+                                                              Dimensions.size25,
+                                                        )),
                                                   )
                                                 ],
                                               )
@@ -395,20 +419,27 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
             _selectedCategory = 0;
           });
         },
-        child: Container(
-          width: Dimensions.size10 * 13,
-          height: Dimensions.size30,
-          decoration: BoxDecoration(
-              color: _selectedCategory == 0
-                  ? HexColor('2db45b')
-                  : Colors.grey[700],
-              borderRadius: BorderRadius.circular(Dimensions.size40)),
-          child: Center(
-              child: Text(
-            "Recommended",
-            style: TextStyle(
-                fontSize: Dimensions.size16, fontWeight: FontWeight.bold),
-          )),
+        child: Row(
+          children: [
+            Container(
+              width: Dimensions.size10 * 13,
+              height: Dimensions.size30,
+              decoration: BoxDecoration(
+                  color: _selectedCategory == 0
+                      ? HexColor('2db45b')
+                      : Colors.grey[700],
+                  borderRadius: BorderRadius.circular(Dimensions.size40)),
+              child: Center(
+                  child: Text(
+                "Recommended",
+                style: TextStyle(
+                    fontSize: Dimensions.size16, fontWeight: FontWeight.bold),
+              )),
+            ),
+            SizedBox(
+              width: Dimensions.size10,
+            )
+          ],
         ),
       ),
       GestureDetector(
@@ -417,29 +448,36 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
             _selectedCategory = 1;
           });
         },
-        child: Container(
-          width: Dimensions.size30 * 3,
-          height: Dimensions.size30,
-          decoration: BoxDecoration(
-              color: _selectedCategory == 1
-                  ? HexColor('2db45b')
-                  : Colors.grey[700],
-              borderRadius: BorderRadius.circular(Dimensions.size40)),
-          child: Center(
-              child: Text(
-            "Popular",
-            style: TextStyle(
-                fontSize: Dimensions.size16, fontWeight: FontWeight.bold),
-          )),
+        child: Row(
+          children: [
+            Container(
+              width: Dimensions.size30 * 3,
+              height: Dimensions.size30,
+              decoration: BoxDecoration(
+                  color: _selectedCategory == 1
+                      ? HexColor('2db45b')
+                      : Colors.grey[700],
+                  borderRadius: BorderRadius.circular(Dimensions.size40)),
+              child: Center(
+                  child: Text(
+                "Popular",
+                style: TextStyle(
+                    fontSize: Dimensions.size16, fontWeight: FontWeight.bold),
+              )),
+            ),
+            SizedBox(
+              width: Dimensions.size10,
+            )
+          ],
         ),
       ),
-      GestureDetector(
-        onTap: () {
-          setState(() {
-            _selectedCategory = 2;
-          });
-        },
-        child: Expanded(
+      Expanded(
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              _selectedCategory = 2;
+            });
+          },
           child: Container(
             width: Dimensions.size80,
             height: Dimensions.size30,

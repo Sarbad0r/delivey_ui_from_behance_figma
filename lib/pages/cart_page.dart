@@ -258,8 +258,11 @@ class CartPage extends StatelessWidget {
                                                                           .cartProductList[
                                                                       index]);
                                                         },
-                                                        icon: const Icon(Icons
-                                                            .favorite_border)),
+                                                        icon: Icon(
+                                                          Icons.favorite_border,
+                                                          size:
+                                                              Dimensions.size25,
+                                                        )),
                                                   )
                                                 else
                                                   Padding(
@@ -273,9 +276,11 @@ class CartPage extends StatelessWidget {
                                                                           .cartProductList[
                                                                       index]);
                                                         },
-                                                        icon: const Icon(
+                                                        icon: Icon(
                                                           Icons.favorite,
                                                           color: Colors.red,
+                                                          size:
+                                                              Dimensions.size25,
                                                         )),
                                                   ),
                                                 if (!cartProvider
@@ -290,8 +295,11 @@ class CartPage extends StatelessWidget {
                                                                     .cartProductList[
                                                                 index]);
                                                       },
-                                                      icon: const Icon(Icons
-                                                          .add_circle_outlined))
+                                                      icon: Icon(
+                                                        Icons
+                                                            .add_circle_outlined,
+                                                        size: Dimensions.size25,
+                                                      ))
                                                 else
                                                   Row(
                                                     children: [
@@ -308,10 +316,16 @@ class CartPage extends StatelessWidget {
                                                                   .remove_circle_outline,
                                                               color: Colors
                                                                   .grey[500],
+                                                              size: Dimensions
+                                                                  .size25,
                                                             )),
                                                       ),
                                                       Text(
-                                                          "${cartProvider.cartProductList[index].quantity}"),
+                                                        "${cartProvider.cartProductList[index].quantity}",
+                                                        style: TextStyle(
+                                                            fontSize: Dimensions
+                                                                .size18),
+                                                      ),
                                                       Expanded(
                                                         child: IconButton(
                                                             onPressed: () {
@@ -320,8 +334,12 @@ class CartPage extends StatelessWidget {
                                                                           .cartProductList[
                                                                       index]);
                                                             },
-                                                            icon: const Icon(Icons
-                                                                .add_circle_outlined)),
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .add_circle_outlined,
+                                                              size: Dimensions
+                                                                  .size25,
+                                                            )),
                                                       )
                                                     ],
                                                   )

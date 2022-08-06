@@ -39,8 +39,8 @@ class Category {
       Category(
           id: 4,
           rating: 4.8,
-          name: "Burger King",
-          countryCuisine: "Burger Europian",
+          name: "Salat",
+          countryCuisine: "Salats Europian",
           discount: 25,
           image: 'assets/images/salat.jpg'),
     ];

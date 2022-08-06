@@ -55,7 +55,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                 top: 4,
                                 left: Dimensions.size15,
                               ),
-                              prefixIcon: Icon(Icons.search),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: Dimensions.size25,
+                              ),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),

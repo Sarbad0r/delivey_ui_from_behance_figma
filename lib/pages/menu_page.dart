@@ -57,7 +57,10 @@ class _MenuPageState extends State<MenuPage> {
                                 top: 4,
                                 left: Dimensions.size15,
                               ),
-                              prefixIcon: Icon(Icons.search),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: Dimensions.size25,
+                              ),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.white, width: 1.0),
@@ -137,10 +140,16 @@ class _MenuPageState extends State<MenuPage> {
                             MaterialPageRoute(
                                 builder: (context) => CartPage()));
                       },
-                      icon: const Icon(Icons.shopping_cart)),
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        size: Dimensions.size25,
+                      )),
                 )
               ],
             ),
+          ),
+          SizedBox(
+            height: Dimensions.size20,
           ),
           if (listForSearch.isNotEmpty)
             Expanded(
@@ -260,7 +269,9 @@ class _MenuPageState extends State<MenuPage> {
                                               children: [
                                                 if (!cartProvider
                                                     .checkProductFavorite(
-                                                        listForSearch[index]))
+                                                        cartProvider
+                                                                .listOfProduct[
+                                                            index]))
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         top: Dimensions.size30),
@@ -268,11 +279,15 @@ class _MenuPageState extends State<MenuPage> {
                                                         onPressed: () {
                                                           cartProvider
                                                               .addToFavorite(
-                                                                  listForSearch[
+                                                                  cartProvider
+                                                                          .listOfProduct[
                                                                       index]);
                                                         },
-                                                        icon: const Icon(Icons
-                                                            .favorite_border)),
+                                                        icon: Icon(
+                                                          Icons.favorite_border,
+                                                          size:
+                                                              Dimensions.size25,
+                                                        )),
                                                   )
                                                 else
                                                   Padding(
@@ -282,54 +297,76 @@ class _MenuPageState extends State<MenuPage> {
                                                         onPressed: () {
                                                           cartProvider
                                                               .addToFavorite(
-                                                                  listForSearch[
+                                                                  cartProvider
+                                                                          .listOfProduct[
                                                                       index]);
                                                         },
-                                                        icon: const Icon(
+                                                        icon: Icon(
                                                           Icons.favorite,
                                                           color: Colors.red,
+                                                          size:
+                                                              Dimensions.size25,
                                                         )),
                                                   ),
                                                 if (!cartProvider
                                                     .checkProductCart(
-                                                        listForSearch[index]))
+                                                        cartProvider
+                                                                .listOfProduct[
+                                                            index]))
                                                   IconButton(
                                                       onPressed: () {
                                                         cartProvider.addToCart(
-                                                            listForSearch[
+                                                            cartProvider
+                                                                    .listOfProduct[
                                                                 index]);
                                                       },
-                                                      icon: const Icon(Icons
-                                                          .add_circle_outlined))
+                                                      icon: Icon(
+                                                        Icons
+                                                            .add_circle_outlined,
+                                                        size: Dimensions.size25,
+                                                      ))
                                                 else
                                                   Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
                                                       Expanded(
                                                         child: IconButton(
                                                             onPressed: () {
-                                                              cartProvider
-                                                                  .removeFromCart(
-                                                                      listForSearch[
-                                                                          index]);
+                                                              cartProvider.removeFromCart(
+                                                                  cartProvider
+                                                                          .listOfProduct[
+                                                                      index]);
                                                             },
                                                             icon: Icon(
                                                               Icons
                                                                   .remove_circle_outline,
                                                               color: Colors
                                                                   .grey[500],
+                                                              size: Dimensions
+                                                                  .size25,
                                                             )),
                                                       ),
                                                       Text(
-                                                          "${listForSearch[index].quantity}"),
+                                                        "${cartProvider.listOfProduct[index].quantity}",
+                                                        style: TextStyle(
+                                                            fontSize: Dimensions
+                                                                .size18),
+                                                      ),
                                                       Expanded(
                                                         child: IconButton(
                                                             onPressed: () {
                                                               cartProvider.addToCart(
-                                                                  listForSearch[
+                                                                  cartProvider
+                                                                          .listOfProduct[
                                                                       index]);
                                                             },
-                                                            icon: const Icon(Icons
-                                                                .add_circle_outlined)),
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .add_circle_outlined,
+                                                              size: Dimensions
+                                                                  .size25,
+                                                            )),
                                                       )
                                                     ],
                                                   )
