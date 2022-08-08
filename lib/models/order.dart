@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:delivery_food_app_from_behance1/models/product.dart';
 
 class Order {
@@ -7,6 +9,7 @@ class Order {
   double? total;
   List<Product>? productList;
   String? dateTime;
+  String? address;
 
   Order(
       {this.id,
@@ -14,23 +17,29 @@ class Order {
       this.qtyOfProducts,
       this.total,
       this.productList,
-      this.dateTime});
+      this.dateTime,
+      this.address});
 
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
         id: json['id'],
-        userId: json['userId'],
-        qtyOfProducts: json['qtyOfProducts'],
-        total: json['total'],
+        userId: json['user_id'],
+        qtyOfProducts: json['qty_of_products'],
+        total: json['total'].toDouble(),
         dateTime: json['created_at']);
   }
 
   Map<String, dynamic> toJson() {
+    var map = [];
+    for (var all in productList!) {
+      map.add(all.toJson());
+    }
     return {
       "user_id": userId,
       "qty_of_products": qtyOfProducts,
       "total": total,
-      "productList": productList
+      "productList": map,
+      "address": address
     };
   }
 }

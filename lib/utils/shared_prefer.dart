@@ -10,8 +10,9 @@ class SharedPrefer {
     await shared?.setString("token", getToken);
   }
 
-  Future<String?> getToken() async {
-    return shared?.getString('token')!.trim();
+  Future<String> getToken() async {
+    String? token = shared?.getString('token');
+    return token?.trim() ?? '';
   }
 
   Future<void> deleteToken() async {

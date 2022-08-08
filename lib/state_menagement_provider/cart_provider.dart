@@ -71,7 +71,7 @@ class CartProvider extends ChangeNotifier {
   bool checkProductFavorite(Product product) {
     return favoritesProductList.contains(product);
   }
-  
+
   void addToFavorite(Product product) {
     if (favoritesProductList.contains(product)) {
       favoritesProductList.removeWhere((element) => element.id == product.id);
@@ -81,13 +81,24 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   double totalOfCart() {
     double res = 0.0;
     for (var each in cartProductList) {
       res += each.total();
     }
     return res;
+  }
+
+  int totalQty() {
+    int res = 0;
+    for (int i = 0; i < cartProductList.length; i++) {
+      res += cartProductList[i].quantity!;
+    }
+    return res;
+  }
+
+  void clearCart() {
+    cartProductList.clear();
+    notifyListeners();
   }
 }

@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get/orders/{userId}', [OrderController::class, 'getOrdes']);
     Route::get('/get/products/{orderId}', [OrderController::class, 'getProducts']);
-    Route::post('/set/order', [OrderController::class, 'setOrderAndProducts']);
+    Route::post('/set/orderandproduct', [OrderController::class, 'setOrderAndProducts']);
 });
 
 Route::post('/create/user', [AuthController::class, 'register']);

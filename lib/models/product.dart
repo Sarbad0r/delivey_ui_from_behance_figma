@@ -28,6 +28,16 @@ class Product {
         ingredients: json['ingredients']);
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "price": price,
+      "quantity": quantity,
+      "about": about,
+      "ingredients": ingredients
+    };
+  }
+
   double total() {
     return quantity! * price!;
   }

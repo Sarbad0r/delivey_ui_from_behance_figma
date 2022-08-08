@@ -24,14 +24,17 @@ class OrderController extends Controller
 
     public function setOrderAndProducts(Request $request)
     {
+        $dateTime = date("Y-m-d H:i:s");
         if (!empty($request['productList'])) {
             $getOrderId = Order::insertGetId([
                 'user_id' => $request['user_id'],
                 'qty_of_products' => $request['qty_of_products'],
-                'total' => $request['total']
+                'total' => $request['total'],
+                'address' => $request['address'],
+                'created_at' => $dateTime
             ]);
 
-            $products = $request->productList->all();
+            $products = $request['productList'];
             foreach ($products as $each) {
                 Product::create([
                     'order_id' => $getOrderId,
@@ -42,11 +45,18 @@ class OrderController extends Controller
                     'ingredients' => $each['ingredients']
                 ]);
             }
+            return response([
+                'success' => true
+            ]);
         } else {
             Order::create([
                 'user_id' => $request['user_id'],
                 'qty_of_products' => $request['qty_of_products'],
-                'total' => $request['total']
+                'total' => $request['total'],
+                'address' => $request['address']
+            ]);
+            return response([
+                'success' => true
             ]);
         }
     }

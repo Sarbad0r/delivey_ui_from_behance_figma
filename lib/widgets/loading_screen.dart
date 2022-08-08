@@ -34,9 +34,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
           'Accept': 'application/json',
         },
       );
-      print(await SharedPrefer().getToken());
-      print(await SharedPrefer().getUserID());
-      print(jsonDecode(res.body));
       if (res.statusCode == 200) {
         Map<String, dynamic> map = jsonDecode(res.body);
         print(map);
@@ -79,7 +76,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
-        body: Container(
+        body: ListView(
+      shrinkWrap: true,
+      children: [
+        Container(
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
                 image: DecorationImage(
                     colorFilter: ColorFilter.mode(
@@ -115,6 +116,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   ],
                 ),
               )
-            ])));
+            ])),
+      ],
+    ));
   }
 }

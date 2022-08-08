@@ -241,8 +241,8 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                         tag:
                                             "${cutSpace(cartProvider.listOfProduct[index].name!)}",
                                         child: Container(
-                                          width: Dimensions.size10 * 11,
-                                          height: Dimensions.size10 * 11,
+                                          width: Dimensions.size10 * 10,
+                                          height: Dimensions.size10 * 10,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(

@@ -1,7 +1,10 @@
 import 'package:badges/badges.dart';
+import 'package:delivery_food_app_from_behance1/api/order_api/order_api.dart';
+import 'package:delivery_food_app_from_behance1/models/order.dart';
 import 'package:delivery_food_app_from_behance1/pages/map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color/flutter_color.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:provider/provider.dart';
 import '../api/api_connections.dart';
@@ -9,8 +12,20 @@ import '../state_menagement_provider/cart_provider.dart';
 import '../utils/dimension.dart';
 import '../utils/shared_prefer.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  String street = '';
+  void updateParent(String nameStreet) {
+    setState(() {
+      street = nameStreet;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +121,34 @@ class CartPage extends StatelessWidget {
                   Text('8 people online',
                       style: TextStyle(color: HexColor("2db45b"))),
                   SizedBox(
-                    height: Dimensions.size25,
+                    height: Dimensions.size10,
                   ),
                 ],
               ),
             ),
           ),
+          if (street.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.only(
+                  left: Dimensions.size30, right: Dimensions.size30),
+              child: Row(
+                children: [
+                  Text(
+                    street,
+                    style: TextStyle(fontSize: Dimensions.size14),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          street = '';
+                        });
+                      },
+                      icon: Icon(Icons.delete))
+                ],
+              ),
+            ),
           SizedBox(
-            height: Dimensions.size20,
+            height: Dimensions.size10,
           ),
           Expanded(
             child: Padding(
@@ -201,8 +236,8 @@ class CartPage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            width: Dimensions.size10 * 13,
-                                            height: Dimensions.size10 * 13,
+                                            width: Dimensions.size10 * 10,
+                                            height: Dimensions.size10 * 10,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -381,11 +416,29 @@ class CartPage extends StatelessWidget {
           ),
           if (cartProvider.cartProductList.isNotEmpty)
             InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ReverseSearchPage()));
+              onTap: () async {
+                if (street.isEmpty) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReverseSearchPage(
+                                getParentState: updateParent,
+                              )));
+                } else {
+                  EasyLoading.show(status: "Оформляем заказ");
+                  var order = Order(
+                      userId: await SharedPrefer().getUserID(),
+                      qtyOfProducts: cartProvider.totalQty(),
+                      total: cartProvider.totalOfCart(),
+                      productList: cartProvider.cartProductList,
+                      address: street);
+                  await OrderApi().setOrderAndProduct(order).then((value) {
+                    if (value == true) {
+                      EasyLoading.showSuccess("Все!");
+                      cartProvider.clearCart();
+                    }
+                  });
+                }
               },
               child: Container(
                 width: Dimensions.size10 * 14,

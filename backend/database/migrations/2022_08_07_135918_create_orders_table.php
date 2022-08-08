@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('qty_of_products');
             $table->double("total");
+            $table->string('address');
             $table->timestamps();
         });
     }

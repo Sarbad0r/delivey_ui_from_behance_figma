@@ -1,6 +1,8 @@
 import 'package:delivery_food_app_from_behance1/pages/all_orders.dart';
 import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
+import 'package:delivery_food_app_from_behance1/state_menagement_provider/side_bar_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../api/api_connections.dart';
 import '../utils/dimension.dart';
@@ -16,6 +18,7 @@ class SideBar extends StatefulWidget {
 class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
+    var pageNumber = Provider.of<SideBarPage>(context);
     return Drawer(
       backgroundColor: Colors.black,
       child: ListView(
@@ -98,6 +101,10 @@ class _SideBarState extends State<SideBar> {
               alignment: Alignment.centerLeft,
               child: TextButton(
                   onPressed: () {
+                    if (pageNumber.numberOfPage == 1) {
+                      return;
+                    }
+                    pageNumber.setPageNumber(1);
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => CategoryPage()),
@@ -112,6 +119,10 @@ class _SideBarState extends State<SideBar> {
               alignment: Alignment.centerLeft,
               child: TextButton(
                   onPressed: () {
+                    if (pageNumber.numberOfPage == 2) {
+                      return;
+                    }
+                    pageNumber.setPageNumber(2);
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => AllOrders()),

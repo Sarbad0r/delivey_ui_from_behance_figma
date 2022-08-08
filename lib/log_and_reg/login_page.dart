@@ -50,6 +50,9 @@ class _LoginPageState extends State<LoginPage> {
         return;
       } else {
         await SharedPrefer().setToken(json['token']);
+        await SharedPrefer().setUserId(json['user']['id']);
+        await SharedPrefer().setUserEmail(json['user']['email']);
+        await SharedPrefer().setUserName(json['user']['name']);
         print(json['token']);
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
@@ -70,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         body: Container(
           decoration: BoxDecoration(

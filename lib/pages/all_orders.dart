@@ -1,5 +1,10 @@
+import 'package:delivery_food_app_from_behance1/api/order_api/order_api.dart';
+import 'package:delivery_food_app_from_behance1/models/order.dart';
 import 'package:delivery_food_app_from_behance1/widgets/side_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../utils/dimension.dart';
 
 class AllOrders extends StatefulWidget {
   AllOrders({Key? key}) : super(key: key);
@@ -27,10 +32,99 @@ class _AllOrdersState extends State<AllOrders> {
               onPressed: () {
                 _scaffoldState.currentState?.openDrawer();
               },
-              icon: Icon(Icons.menu)),
+              icon: const Icon(Icons.menu)),
           elevation: 0,
-          title: Text("Все заказы"),
+          title: const Text("Все заказы"),
         ),
+        body: FutureBuilder<List<Order>>(
+            future: OrderApi().getAllOrders(),
+            builder: (context, snap) {
+              bool checkConnection =
+                  snap.connectionState == ConnectionState.done;
+              if (!checkConnection) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                );
+              } else if (snap.hasError) {
+                return Text("errors : ${snap.error}");
+              } else if (snap.data!.isEmpty) {
+                return const Center(child: Text("Пока пусто"));
+              } else {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: snap.data!.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {},
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: Dimensions.size5,
+                              right: Dimensions.size5,
+                              bottom: Dimensions.size5 * 2),
+                          child: Container(
+                            height: Dimensions.size5 * 17,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 120,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          opacity: 0.5,
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              'https://avatars.mds.yandex.net/i?id=0d452b8fba50e9483b9ce00845e7edca_l-4476671-images-thumbs&n=13'))),
+                                ),
+                                SizedBox(
+                                  width: Dimensions.size5,
+                                ),
+                                Expanded(
+                                  child: Card(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Итог: ${snap.data![index].total}c",
+                                          style: TextStyle(
+                                              fontSize: Dimensions.size20),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Количество: ${snap.data![index].qtyOfProducts}",
+                                              style: TextStyle(
+                                                  fontSize: Dimensions.size16),
+                                            ),
+                                            
+                                            Text(
+                                              DateFormat.yMMMMd('RU').format(
+                                                  DateTime.parse(snap
+                                                      .data![index].dateTime!
+                                                      .substring(0, 10))),
+                                              style: TextStyle(
+                                                  fontSize: Dimensions.size16),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              }
+            }),
       ),
     );
   }
