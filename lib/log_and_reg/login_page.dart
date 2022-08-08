@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:delivery_food_app_from_behance1/api/api_connections.dart';
 import 'package:delivery_food_app_from_behance1/log_and_reg/register_page.dart';
 import 'package:delivery_food_app_from_behance1/models/user.dart';
+import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/menu_page.dart';
 import 'package:delivery_food_app_from_behance1/utils/dimension.dart';
 import 'package:delivery_food_app_from_behance1/utils/shared_prefer.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_color/flutter_color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class LoginPage extends StatefulWidget {
@@ -52,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => MenuPage()),
+            MaterialPageRoute(builder: (context) => const CategoryPage()),
             (route) => false);
       }
     }
@@ -75,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.5), BlendMode.darken),
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/images/background.jpg"))),
+                  image: const AssetImage("assets/images/background.jpg"))),
           width: double.maxFinite,
           child: Stack(
             children: [
@@ -99,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: Dimensions.size20,
                   ),
-                  Text("Hey! We missed you"),
+                  const Text("Hey! We missed you"),
                   SizedBox(
                     height: Dimensions.size30,
                   ),
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       controller: _emailController,
                       decoration: InputDecoration(
                           hintText: "E-mail",
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintStyle: const TextStyle(color: Colors.white),
                           contentPadding: EdgeInsets.only(
                             top: 4,
                             left: Dimensions.size15,

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_color/flutter_color.dart';
 
 import 'package:provider/provider.dart';
+import '../api/api_connections.dart';
 import '../state_menagement_provider/cart_provider.dart';
 import '../utils/dimension.dart';
+import '../utils/shared_prefer.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -58,23 +60,37 @@ class CartPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        width: Dimensions.size50,
-                        height: Dimensions.size50,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.size30)),
-                      ),
+                      FutureBuilder<int>(
+                          future: SharedPrefer().getUserID(),
+                          builder: (context, snap) {
+                            if (snap.hasError) {
+                              return Text("${snap.error}");
+                            } else if (snap.data == null) {
+                              return Text("Empty");
+                            } else {
+                              return Container(
+                                width: Dimensions.size50,
+                                height: Dimensions.size50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.size30),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            "${ApiConnections.urlImage}/${snap.data}"))),
+                              );
+                            }
+                          }),
                       SizedBox(
                         width: Dimensions.size10,
                       ),
-                      Text(
-                        "Hi, Kate",
-                        style: TextStyle(
-                          fontSize: Dimensions.size18,
-                        ),
-                      ),
+                      FutureBuilder<String>(
+                          future: SharedPrefer().getUserName(),
+                          builder: ((context, snapshot) => Text(
+                                "Hi, ${snapshot.data}",
+                                style: TextStyle(
+                                  fontSize: Dimensions.size18,
+                                ),
+                              ))),
                       SizedBox(
                         width: Dimensions.size10,
                       ),

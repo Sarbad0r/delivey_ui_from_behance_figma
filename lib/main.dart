@@ -1,4 +1,5 @@
 import 'package:delivery_food_app_from_behance1/log_and_reg/login_page.dart';
+import 'package:delivery_food_app_from_behance1/log_and_reg/register_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/menu_page.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/cart_provider.dart';

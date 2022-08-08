@@ -18,6 +18,16 @@ class Product {
       this.ingredients,
       this.favorite});
 
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+        id: json['id'],
+        name: json['name'],
+        price: json['price'],
+        quantity: json['quantity'],
+        about: json['about'],
+        ingredients: json['ingredients']);
+  }
+
   double total() {
     return quantity! * price!;
   }

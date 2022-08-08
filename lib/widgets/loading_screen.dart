@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:delivery_food_app_from_behance1/api/api_connections.dart';
 import 'package:delivery_food_app_from_behance1/log_and_reg/login_page.dart';
+import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/menu_page.dart';
 import 'package:delivery_food_app_from_behance1/utils/dimension.dart';
 import 'package:delivery_food_app_from_behance1/utils/shared_prefer.dart';
@@ -33,8 +34,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
           'Accept': 'application/json',
         },
       );
+      print(await SharedPrefer().getToken());
+      print(await SharedPrefer().getUserID());
+      print(jsonDecode(res.body));
       if (res.statusCode == 200) {
         Map<String, dynamic> map = jsonDecode(res.body);
+        print(map);
         if (map['success'] == false) {
           Navigator.pushAndRemoveUntil(
               context,
@@ -45,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         if (map['success'] == true) {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (cotnext) => const MenuPage()),
+              MaterialPageRoute(builder: (cotnext) => const CategoryPage()),
               (route) => false);
         }
       }

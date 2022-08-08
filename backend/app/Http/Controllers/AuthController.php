@@ -12,24 +12,48 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $check = User::where('email', $request['email'])->first();
-        if (!$check) {
-            $user = User::create([
-                'name' => $request['name'],
-                "email" => $request['email'],
-                "password" => Hash::make($request['password'])
-            ]);
+        if (!empty($request['imagejun'])) {
+            $path = $request->file('imagejun')->store('images');
+            $check = User::where('email', $request['email'])->first();
+            if (!$check) {
+                $user = User::create([
+                    'name' => $request['name'],
+                    "email" => $request['email'],
+                    "password" => Hash::make($request['password']),
+                    "image" => $path
+                ]);
 
-            return response([
-                'success' => true,
-                'user' => $user,
-                'token' => $user->createToken('secret')->plainTextToken
-            ]);
+                return response([
+                    'success' => true,
+                    'user' => $user,
+                    'token' => $user->createToken('secret')->plainTextToken
+                ]);
+            } else {
+                return response([
+                    'success' => false,
+                    'message' => "Такой пользователь уже существует"
+                ]);
+            }
         } else {
-            return response([
-                'success' => false,
-                'message' => "Такой пользователь уже существует"
-            ]);
+            $check = User::where('email', $request['email'])->first();
+            if (!$check) {
+                $user = User::create([
+                    'name' => $request['name'],
+                    "email" => $request['email'],
+                    "password" => Hash::make($request['password']),
+                ]);
+
+                return response([
+                    'success' => true,
+                    'user' => $user,
+                    'token' => $user->createToken('secret')->plainTextToken
+                ]);
+            } else {
+                return response([
+                    'success' => false,
+                    'message' => "Такой пользователь уже существует"
+                ]);
+            }
         }
     }
 
@@ -80,7 +104,7 @@ class AuthController extends Controller
                 ]);
             }
         }
-        [$idToken, $token] = explode('|', $request['token'], strpos($request['token'], '|'));
+        [$idToken, $token] = explode('|', $request['token'], 2);
 
         $check = DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->where('created_at', '>=', $timeForToken)->first();
 
@@ -97,5 +121,11 @@ class AuthController extends Controller
             'message' => 'done',
             'length of token' => $token,
         ];
+    }
+
+    public function getImage($id)
+    {
+        $getPath = User::where('id', $id)->first()->value('image');
+        return response()->file(storage_path('app/' . $getPath));
     }
 }
