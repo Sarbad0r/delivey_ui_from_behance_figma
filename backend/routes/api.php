@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get/orders/{userId}', [OrderController::class, 'getOrdes']);
     Route::get('/get/products/{orderId}', [OrderController::class, 'getProducts']);
     Route::post('/set/orderandproduct', [OrderController::class, 'setOrderAndProducts']);
+    Route::get('/get/allusers', [AuthController::class, 'getAllUsers']);
+    Route::get('/get/productById/{orderId}', [ProductController::class, 'getProductByOrderId']);
 });
 
 Route::post('/create/user', [AuthController::class, 'register']);

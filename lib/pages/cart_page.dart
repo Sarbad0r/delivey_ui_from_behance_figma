@@ -435,6 +435,9 @@ class _CartPageState extends State<CartPage> {
                   await OrderApi().setOrderAndProduct(order).then((value) {
                     if (value == true) {
                       EasyLoading.showSuccess("Все!");
+                      setState(() {
+                        street = '';
+                      });
                       cartProvider.clearCart();
                     }
                   });

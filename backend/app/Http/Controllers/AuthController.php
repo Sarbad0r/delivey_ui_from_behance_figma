@@ -128,4 +128,11 @@ class AuthController extends Controller
         $getPath = User::where('id', $id)->first()->value('image');
         return response()->file(storage_path('app/' . $getPath));
     }
+
+    public function getAllUsers()
+    {
+        return response([
+            'users' => User::select('name', 'image')->get()
+        ]);
+    }
 }

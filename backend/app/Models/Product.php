@@ -16,6 +16,8 @@ class Product extends Model
         'name',
         'price',
         'about',
-        'ingredients'
+        'ingredients',
+        'quantity',
+        'image'
     ];
 }

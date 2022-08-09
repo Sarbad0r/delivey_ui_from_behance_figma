@@ -22,15 +22,18 @@ class Product {
     return Product(
         id: json['id'],
         name: json['name'],
-        price: json['price'],
+        price: json['price'].toDouble(),
         quantity: json['quantity'],
         about: json['about'],
-        ingredients: json['ingredients']);
+        image: json['image']
+        // ingredients: json['ingredients']
+        );
   }
 
   Map<String, dynamic> toJson() {
     return {
       "name": name,
+      "image": image,
       "price": price,
       "quantity": quantity,
       "about": about,

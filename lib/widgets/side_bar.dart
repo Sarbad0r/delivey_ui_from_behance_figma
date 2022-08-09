@@ -1,5 +1,6 @@
 import 'package:delivery_food_app_from_behance1/pages/all_orders.dart';
 import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
+import 'package:delivery_food_app_from_behance1/pages/profile_page.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/side_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class _SideBarState extends State<SideBar> {
                       } else if (snap.hasError) {
                         return Text("${snap.error}");
                       } else if (snap.data == null) {
-                        return Text("Empty");
+                        return const Text("Empty");
                       } else {
                         return Container(
                           width: Dimensions.size50,
@@ -60,10 +61,10 @@ class _SideBarState extends State<SideBar> {
                       bool checkConnection =
                           snap.connectionState == ConnectionState.done;
                       if (!checkConnection) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                       if (snap.data!.isEmpty) {
-                        return Text("");
+                        return const Text("");
                       }
                       if (snap.hasError) {
                         return Text("${snap.error}");
@@ -82,10 +83,10 @@ class _SideBarState extends State<SideBar> {
                   bool checkConnection =
                       snap.connectionState == ConnectionState.done;
                   if (!checkConnection) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                   if (snap.data!.isEmpty) {
-                    return Text("");
+                    return const Text("");
                   }
                   if (snap.hasError) {
                     return Text("${snap.error}");
@@ -107,13 +108,13 @@ class _SideBarState extends State<SideBar> {
                     pageNumber.setPageNumber(1);
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => CategoryPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const CategoryPage()),
                         (route) => false);
                   },
-                  child: Text(
+                  child: const Text(
                     "Главная",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: Dimensions.size14),
+                    style: TextStyle(color: Colors.white, fontSize: 14),
                   ))),
           Align(
               alignment: Alignment.centerLeft,
@@ -128,10 +129,26 @@ class _SideBarState extends State<SideBar> {
                         MaterialPageRoute(builder: (context) => AllOrders()),
                         (route) => false);
                   },
-                  child: Text(
+                  child: const Text(
                     "Все заказы",
-                    style: TextStyle(
-                        color: Colors.white, fontSize: Dimensions.size14),
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ))),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                  onPressed: () {
+                    if (pageNumber.numberOfPage == 3) {
+                      return;
+                    }
+                    pageNumber.setPageNumber(3);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                        (route) => false);
+                  },
+                  child: const Text(
+                    "Профиль",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
                   ))),
         ],
       ),

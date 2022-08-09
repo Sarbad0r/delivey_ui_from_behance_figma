@@ -157,12 +157,18 @@ class _ReverseSearchPageState extends State<ReverseSearchPage> {
               });
               Navigator.pop(context);
             },
-            child: Text("Да")),
+            child: Text(
+              "Да",
+              style: TextStyle(color: Colors.white),
+            )),
         TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Нет"))
+            child: Text(
+              "Нет",
+              style: TextStyle(color: Colors.white),
+            ))
       ],
     );
     showDialog(context: context, builder: (context) => newAlerDialog);

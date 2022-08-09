@@ -40,6 +40,7 @@ class OrderController extends Controller
                     'order_id' => $getOrderId,
                     'name' => $each['name'],
                     'price' => $each['price'],
+                    'image' => $each['image'],
                     'quantity' => $each['quantity'],
                     'about' => $each['about'],
                     'ingredients' => $each['ingredients']
