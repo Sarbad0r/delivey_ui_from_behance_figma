@@ -141,62 +141,68 @@ class _ProductAboutPageState extends State<ProductAboutPage> {
             padding: EdgeInsets.only(
               left: Dimensions.size30,
             ),
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      FutureBuilder<int>(
-                          future: SharedPrefer().getUserID(),
-                          builder: (context, snap) {
-                            if (snap.hasError) {
-                              return Text("${snap.error}");
-                            } else if (snap.data == null) {
-                              return Text("Empty");
-                            } else {
-                              return Container(
-                                width: Dimensions.size50,
-                                height: Dimensions.size50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.size30),
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            "${ApiConnections.urlImage}/${snap.data}"))),
-                              );
-                            }
-                          }),
-                      SizedBox(
-                        width: Dimensions.size10,
-                      ),
-                      FutureBuilder<String>(
-                          future: SharedPrefer().getUserName(),
-                          builder: ((context, snapshot) => Text(
-                                "Hi, ${snapshot.data}",
-                                style: TextStyle(
-                                  fontSize: Dimensions.size18,
-                                ),
-                              ))),
-                      SizedBox(
-                        width: Dimensions.size10,
-                      ),
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: Dimensions.size25,
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: Dimensions.size10,
-                  ),
-                  Text('8 people online',
-                      style: TextStyle(color: HexColor("2db45b"))),
-                  SizedBox(
-                    height: Dimensions.size25,
-                  ),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    FutureBuilder<int>(
+                        future: SharedPrefer().getUserID(),
+                        builder: (context, snap) {
+                          if (snap.hasError) {
+                            return Text("${snap.error}");
+                          } else if (snap.data == null) {
+                            return Container(
+                              width: Dimensions.size50,
+                              height: Dimensions.size50,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.size30),
+                              ),
+                            );
+                          } else {
+                            return Container(
+                              width: Dimensions.size50,
+                              height: Dimensions.size50,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size30),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          "${ApiConnections.urlImage}/${snap.data}"))),
+                            );
+                          }
+                        }),
+                    SizedBox(
+                      width: Dimensions.size10,
+                    ),
+                    FutureBuilder<String>(
+                        future: SharedPrefer().getUserName(),
+                        builder: ((context, snapshot) => Text(
+                              "Hi, ${snapshot.data}",
+                              style: TextStyle(
+                                fontSize: Dimensions.size18,
+                              ),
+                            ))),
+                    SizedBox(
+                      width: Dimensions.size10,
+                    ),
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: Dimensions.size25,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: Dimensions.size10,
+                ),
+                Text('8 people online',
+                    style: TextStyle(color: HexColor("2db45b"))),
+                SizedBox(
+                  height: Dimensions.size25,
+                ),
+              ],
             ),
           ),
           Expanded(

@@ -81,7 +81,15 @@ class _CartPageState extends State<CartPage> {
                             if (snap.hasError) {
                               return Text("${snap.error}");
                             } else if (snap.data == null) {
-                              return Text("Empty");
+                              return Container(
+                                width: Dimensions.size50,
+                                height: Dimensions.size50,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size30),
+                                ),
+                              );
                             } else {
                               return Container(
                                 width: Dimensions.size50,

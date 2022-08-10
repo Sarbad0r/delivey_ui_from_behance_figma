@@ -31,14 +31,18 @@ class _SideBarState extends State<SideBar> {
                 FutureBuilder<int>(
                     future: SharedPrefer().getUserID(),
                     builder: (context, snap) {
-                      bool checkConnection =
-                          snap.connectionState == ConnectionState.done;
-                      if (!checkConnection) {
-                        return const CircularProgressIndicator();
-                      } else if (snap.hasError) {
+                      if (snap.hasError) {
                         return Text("${snap.error}");
                       } else if (snap.data == null) {
-                        return const Text("Empty");
+                        return Container(
+                          width: Dimensions.size50,
+                          height: Dimensions.size50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.size30),
+                          ),
+                        );
                       } else {
                         return Container(
                           width: Dimensions.size50,

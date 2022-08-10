@@ -26,7 +26,8 @@ class Order {
         userId: json['user_id'],
         qtyOfProducts: json['qty_of_products'],
         total: json['total'].toDouble(),
-        dateTime: json['created_at']);
+        dateTime: json['created_at'],
+        address: json['address']);
   }
 
   Map<String, dynamic> toJson() {

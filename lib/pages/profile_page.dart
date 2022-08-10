@@ -1,5 +1,8 @@
+import 'package:delivery_food_app_from_behance1/pages/menu_page.dart';
 import 'package:delivery_food_app_from_behance1/widgets/side_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/menu_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -24,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               _scaffoldState.currentState?.openDrawer();
             },
-            icon: Icon(Icons.menu)),
+            icon: const MenuWidget()),
       ),
     );
   }
