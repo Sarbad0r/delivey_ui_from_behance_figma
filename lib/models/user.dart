@@ -4,13 +4,15 @@ class User {
   String? image;
   String? email;
   String? password;
+  String? phoneNumber;
 
   User(
       {this.id,
       this.name,
       required this.email,
       this.image,
-      required this.password});
+      required this.password,
+      this.phoneNumber});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -18,10 +20,18 @@ class User {
         image: json['image'],
         name: json['name'],
         email: json['email'],
-        password: json['password']);
+        password: json['password'],
+        phoneNumber: json['']
+        );
   }
 
   Map<String, dynamic> toJson() {
-    return {"name": name, "image": image, "email": email, "password": password};
+    return {
+      "name": name,
+      "image": image,
+      "email": email,
+      "password": password,
+      "phone_number": phoneNumber
+    };
   }
 }

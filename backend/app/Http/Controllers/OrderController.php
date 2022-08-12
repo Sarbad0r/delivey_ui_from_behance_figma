@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function getOrdes($userId)
+    public function getOrdes($userId, $limit)
     {
         return response([
-            "orders" => Order::where('user_id', $userId)->get(),
+            "orders" => Order::where('user_id', $userId)->paginate($limit)
         ]);
     }
 

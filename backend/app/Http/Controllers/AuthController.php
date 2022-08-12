@@ -20,7 +20,8 @@ class AuthController extends Controller
                     'name' => $request['name'],
                     "email" => $request['email'],
                     "password" => Hash::make($request['password']),
-                    "image" => $path
+                    "image" => $path,
+                    'phone_number' => $request['phone_number']
                 ]);
 
                 return response([
@@ -41,6 +42,7 @@ class AuthController extends Controller
                     'name' => $request['name'],
                     "email" => $request['email'],
                     "password" => Hash::make($request['password']),
+                    'phone_number' => $request['phone_number'],
                 ]);
 
                 return response([
@@ -134,5 +136,55 @@ class AuthController extends Controller
         return response([
             'users' => User::select('name', 'image')->get()
         ]);
+    }
+    public function getUser($userId)
+    {
+        $user = User::where('id', $userId)->first();
+        if ($user) {
+            return response([
+                'success' => true,
+                'user' => $user
+            ]);
+        } else {
+            return response([
+                'success' => false
+            ]);
+        }
+    }
+    public function updateUser(Request $request, $userId)
+    {
+        $user = User::where('id', $userId)->first();
+        if ($user) {
+            User::where('id', $userId)->update([
+                "name" => $request['name'],
+                "email" => $request['email'],
+                "password" => Hash::make($request['password']),
+                "phone_number" => $request['phone_number']
+            ]);
+            return response([
+                'success' => true,
+                'user' => User::where('id', $userId)->first()
+            ]);
+        } else {
+            return response([
+                'success' => false
+            ]);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        if (strpos($request['token'], '|') === false) {
+            DB::table('personal_access_tokens')->where("token", hash('sha256', $request['token']))->delete();
+            return response([
+                "success" => true,
+            ]);
+        } else {
+            [$idToken, $token] = explode('|', $request['token'], 2);
+            DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->delete();
+            return response([
+                "success" => true,
+            ]);
+        }
     }
 }

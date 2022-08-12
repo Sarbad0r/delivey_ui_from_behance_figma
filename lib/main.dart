@@ -1,3 +1,4 @@
+import 'package:delivery_food_app_from_behance1/api/order_api/order_api.dart';
 import 'package:delivery_food_app_from_behance1/log_and_reg/login_page.dart';
 import 'package:delivery_food_app_from_behance1/log_and_reg/register_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
@@ -18,6 +19,7 @@ void main() {
 
   runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider<OrderApi>(create: (_) => OrderApi()),
       ChangeNotifierProvider<SideBarPage>(create: (_) => SideBarPage()),
       ChangeNotifierProvider<CartProvider>(create: (_) => CartProvider())
     ],

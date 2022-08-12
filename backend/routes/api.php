@@ -22,14 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/get/orders/{userId}', [OrderController::class, 'getOrdes']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    
     Route::get('/get/products/{orderId}', [OrderController::class, 'getProducts']);
     Route::post('/set/orderandproduct', [OrderController::class, 'setOrderAndProducts']);
     Route::get('/get/allusers', [AuthController::class, 'getAllUsers']);
     Route::get('/get/productById/{orderId}', [ProductController::class, 'getProductByOrderId']);
+    Route::get('/get/user/{userId}', [AuthController::class, 'getUser']);
+    Route::put('/update/user/{userId}', [AuthController::class, 'updateUser']);
 });
 
 Route::post('/create/user', [AuthController::class, 'register']);
 Route::post('/login/user', [AuthController::class, 'login']);
 Route::post('/check/token', [AuthController::class, 'checkToken']);
 Route::get("/get/image/{id}", [AuthController::class, 'getImage']);
+Route::get('/get/orders/{userId}/{limit}', [OrderController::class, 'getOrdes']);

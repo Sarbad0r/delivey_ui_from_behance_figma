@@ -8,9 +8,10 @@ class MenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(Dimensions.size5),
       width: Dimensions.size30 - 3,
       height: Dimensions.size18,
-      color: Colors.black,
+      color: Colors.transparent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

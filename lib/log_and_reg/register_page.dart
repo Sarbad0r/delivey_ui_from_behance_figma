@@ -30,6 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController(text: '');
   TextEditingController _passwordSecondController =
       TextEditingController(text: '');
+  TextEditingController _phoneNumberController =
+      TextEditingController(text: '+992');
 
   File? _image;
   final ImagePicker _picker = ImagePicker();
@@ -76,6 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
           await SharedPrefer().setUserEmail(map['user']['email']);
           await SharedPrefer().setUserId(map['user']['id']);
           await SharedPrefer().setToken(map['token']);
+          await SharedPrefer().setUserPassword(_passwordSecondController.text);
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => CategoryPage()),
@@ -177,6 +180,41 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: _nameController,
                           decoration: InputDecoration(
                               hintText: "Name",
+                              hintStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.size20),
+                              contentPadding: EdgeInsets.only(
+                                top: 4,
+                                left: Dimensions.size15,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: Dimensions.size25,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.white, width: 1.0),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.size30)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.white, width: 1.0),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.size30))),
+                          onChanged: (v) {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: Dimensions.size15,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: Dimensions.size30, right: Dimensions.size30),
+                        height: Dimensions.size50,
+                        child: TextField(
+                          controller: _phoneNumberController,
+                          decoration: InputDecoration(
+                              hintText: "Phone Number",
                               hintStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: Dimensions.size20),
@@ -337,9 +375,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             Get.snackbar("", "Выберите фото");
                           } else {
                             Map<String, String> body = {
-                              "name": _nameController.text,
-                              "email": _emailController.text,
-                              "password": _passwordSecondController.text
+                              "name": _nameController.text.trim(),
+                              "email": _emailController.text.trim(),
+                              "password": _passwordSecondController.text.trim(),
+                              "phone_number": _phoneNumberController.text.trim()
                             };
                             await registration(body, _image!.path);
                           }

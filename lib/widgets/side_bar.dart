@@ -1,8 +1,12 @@
+import 'package:delivery_food_app_from_behance1/api/user_api/user_api.dart';
+import 'package:delivery_food_app_from_behance1/log_and_reg/login_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/all_orders.dart';
 import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/profile_page.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/side_bar_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../api/api_connections.dart';
@@ -152,6 +156,43 @@ class _SideBarState extends State<SideBar> {
                   },
                   child: const Text(
                     "Профиль",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ))),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                  onPressed: () async {
+                    final navigator = Navigator.of(context);
+                    EasyLoading.show(
+                        indicator: const CircularProgressIndicator(
+                      color: Colors.white,
+                    ));
+
+                    await UserApi().logout().then((value) async {
+                      if (value == false) {
+                        EasyLoading.dismiss();
+                        Get.snackbar("Ошибка", "Ошибка сервера");
+                        return;
+                      } else {
+                        pageNumber.setPageNumber(1);
+                        EasyLoading.dismiss();
+                        navigator
+                            .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                                (route) => false)
+                            .then((value) async {
+                          await SharedPrefer().deleteToken();
+                          await SharedPrefer().deleteUserEmail();
+                          await SharedPrefer().deleteUserId();
+                          await SharedPrefer().deleteUserName();
+                          await SharedPrefer().deleteUserPassword();
+                        });
+                      }
+                    });
+                  },
+                  child: const Text(
+                    "Выход",
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ))),
         ],

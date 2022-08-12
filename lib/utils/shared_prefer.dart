@@ -35,6 +35,10 @@ class SharedPrefer {
     await shared?.setString("userEmail", email);
   }
 
+  Future<void> setUserPassword(String password) async {
+    await shared?.setString("userPassword", password);
+  }
+
   ///get user things
 
   Future<int> getUserID() async {
@@ -53,5 +57,29 @@ class SharedPrefer {
     String? email;
     email = shared?.getString("userName");
     return email ?? '';
+  }
+
+  Future<String> getUserPassword() async {
+    String? password;
+    password = shared?.getString('userPassword');
+    return password ?? '';
+  }
+
+  ///delete user things
+  //
+  Future<void> deleteUserId() async {
+    await shared?.remove("userId");
+  }
+
+  Future<void> deleteUserEmail() async {
+    await shared?.remove("userEmail");
+  }
+
+  Future<void> deleteUserName() async {
+    await shared?.remove("userName");
+  }
+
+  Future<void> deleteUserPassword() async {
+    await shared?.remove("userPassword");
   }
 }

@@ -25,8 +25,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController(text: '');
-  TextEditingController _passwordController = TextEditingController(text: '');
+  TextEditingController _emailController =
+      TextEditingController(text: 'do@gmail.com');
+  TextEditingController _passwordController =
+      TextEditingController(text: '12345');
 
   Future<bool> checkInternetConn() async {
     bool checkInternet = false;
@@ -34,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     return checkInternet;
   }
 
-  Future<void> login(Map<String, dynamic> json) async {
+  Future<void> login(Map<String, dynamic> json, String password) async {
     var res = await http.post(
       Uri.parse("${ApiConnections.URL}/login/user"),
       body: jsonEncode(json),
@@ -44,16 +46,19 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
     if (res.statusCode == 200) {
+      
       Map<String, dynamic> json = jsonDecode(res.body);
       if (json['success'] == false) {
         Get.snackbar("Ошибка", "${json['message']}");
         return;
       } else {
+        print(res.body);
         await SharedPrefer().setToken(json['token']);
         await SharedPrefer().setUserId(json['user']['id']);
+        await SharedPrefer().setUserPassword(password.trim());
         await SharedPrefer().setUserEmail(json['user']['email']);
         await SharedPrefer().setUserName(json['user']['name']);
-        print(json['token']);
+        print("Password: ${await SharedPrefer().getUserPassword()}");
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
             context,
@@ -194,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                           "email": _emailController.text,
                           "password": _passwordController.text
                         };
-                        login(user);
+                        login(user, _passwordController.text.trim());
                       }
                     },
                     child: Container(
