@@ -177,7 +177,7 @@ class _AllOrdersState extends State<AllOrders> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    "Количество: ${orderListProvider.orderList[index].qtyOfProducts}$index",
+                                                    "Количество: ${orderListProvider.orderList[index].qtyOfProducts}",
                                                     style: TextStyle(
                                                         fontSize:
                                                             Dimensions.size16),
@@ -209,7 +209,7 @@ class _AllOrdersState extends State<AllOrders> {
                             );
                           } else {
                             return orderListProvider.hasMore == true
-                                ? Center(
+                                ? const Center(
                                     child: CircularProgressIndicator(
                                         color: Colors.white),
                                   )
