@@ -13,23 +13,26 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import 'api/user_api/user_api.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPrefer.init();
 
   runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider<UserApi>(create: (_) => UserApi()),
       ChangeNotifierProvider<OrderApi>(create: (_) => OrderApi()),
       ChangeNotifierProvider<SideBarPage>(create: (_) => SideBarPage()),
       ChangeNotifierProvider<CartProvider>(create: (_) => CartProvider())
     ],
     child: GetMaterialApp(
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('ru', ''),
       ],
       builder: EasyLoading.init(),

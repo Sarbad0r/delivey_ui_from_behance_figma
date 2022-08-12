@@ -23,8 +23,14 @@ class OrderDetailProduct extends StatelessWidget {
           builder: (context, snap) {
             bool connect = snap.connectionState == ConnectionState.done;
             if (!connect) {
-              return const CircularProgressIndicator(
-                color: Colors.white,
+              return SizedBox(
+                width: double.maxFinite,
+                height: MediaQuery.of(context).size.height,
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
               );
             } else if (snap.hasError) {
               return Text("${snap.error}");

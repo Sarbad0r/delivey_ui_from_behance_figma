@@ -2,6 +2,7 @@ import 'package:delivery_food_app_from_behance1/api/user_api/user_api.dart';
 import 'package:delivery_food_app_from_behance1/log_and_reg/login_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/all_orders.dart';
 import 'package:delivery_food_app_from_behance1/pages/category_page.dart';
+import 'package:delivery_food_app_from_behance1/pages/company_room_page.dart';
 import 'package:delivery_food_app_from_behance1/pages/profile_page.dart';
 import 'package:delivery_food_app_from_behance1/state_menagement_provider/side_bar_page.dart';
 import 'package:flutter/material.dart';
@@ -156,6 +157,23 @@ class _SideBarState extends State<SideBar> {
                   },
                   child: const Text(
                     "Профиль",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ))),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                  onPressed: () {
+                    if (pageNumber.numberOfPage == 4) {
+                      return;
+                    }
+                    pageNumber.setPageNumber(4);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => CompanyRoom()),
+                        (route) => false);
+                  },
+                  child: const Text(
+                    "Комната компании",
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ))),
           Align(

@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    
+    Route::get('/get/orders/{userId}/{limit}', [OrderController::class, 'getOrdes']);
     Route::get('/get/products/{orderId}', [OrderController::class, 'getProducts']);
     Route::post('/set/orderandproduct', [OrderController::class, 'setOrderAndProducts']);
     Route::get('/get/allusers', [AuthController::class, 'getAllUsers']);
@@ -35,5 +35,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/create/user', [AuthController::class, 'register']);
 Route::post('/login/user', [AuthController::class, 'login']);
 Route::post('/check/token', [AuthController::class, 'checkToken']);
-Route::get("/get/image/{id}", [AuthController::class, 'getImage']);
-Route::get('/get/orders/{userId}/{limit}', [OrderController::class, 'getOrdes']);
+Route::get("/get/image/{id}", [AuthController::class, 'getImageById']);
+Route::get("/get/imageUsers/{imagePath}", [AuthController::class, 'getImage']);
+Route::get('/get/alluser/companyroom/{userId}/{maxLength}', [AuthController::class, 'companyRoomAllUsers']);

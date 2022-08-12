@@ -125,10 +125,14 @@ class AuthController extends Controller
         ];
     }
 
-    public function getImage($id)
+    public function getImageById($id)
     {
         $getPath = User::where('id', $id)->first()->value('image');
         return response()->file(storage_path('app/' . $getPath));
+    }
+    public function getImage($imagePath)
+    {
+        return response()->file(storage_path('app/images/' . $imagePath));
     }
 
     public function getAllUsers()
@@ -184,6 +188,27 @@ class AuthController extends Controller
             DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->delete();
             return response([
                 "success" => true,
+            ]);
+        }
+    }
+    public function companyRoomAllUsers($userId, $maxLength)
+    {
+        if (!empty($userId)) {
+            $user = User::where('id', $userId)->first();
+            if ($user) {
+                return response([
+                    'success' => true,
+                    'user' => $user,
+                    'users' => User::where('id', '!=', $userId)->paginate($maxLength)
+                ]);
+            } else {
+                return response([
+                    'success' => false,
+                ]);
+            }
+        } else {
+            return response([
+                'success' => false,
             ]);
         }
     }
